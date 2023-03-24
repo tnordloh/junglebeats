@@ -6,4 +6,7 @@ class Node
     
   end
 
+  def next_node
+    nil
+  end 
 end
