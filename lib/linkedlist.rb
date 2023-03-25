@@ -35,11 +35,11 @@ class LinkedList
   def count
     count = 0
     current_node = @head
-    while current_node != nil
+    until current_node.nil?
       count = count + 1
       current_node = current_node.next_node
     end
-    return count
+    count
   end
   
   def to_string
@@ -51,6 +51,20 @@ class LinkedList
     end
     return string.join(" ")
   end
+
+  def insert(position, data) #yes this stinks i am working on it
+    count = 1
+    current_node = @head
+    until count == position
+      count = count + 1
+      current_node = current_node.next_node
+    end
+
+    next_node = current_node.next_node
+    current_node.next_node = Node.new(data)
+    current_node.next_node.next_node = next_node
+  end
+    
 
   
   

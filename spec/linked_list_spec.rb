@@ -41,4 +41,21 @@ RSpec.describe LinkedList do
     list.prepend("plop")
     expect(list.to_string). to eq("plop deep")
   end
+  
+  it "can be prepended and appended" do
+    list = LinkedList.new(nil)
+    list.append("plop")
+    list.append("suu")
+    list.prepend("dop")
+    expect(list.to_string). to eq("dop plop suu")
+  end
+
+  it "can have an insertion" do
+    list = LinkedList.new(nil)
+    list.append("plop")
+    list.append("suu")
+    list.prepend("dop")
+    list.insert(1, "woo")
+    expect(list.to_string). to eq("dop woo plop suu")
+  end
 end
