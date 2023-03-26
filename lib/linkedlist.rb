@@ -46,7 +46,7 @@ class LinkedList
   def each(&block)
     current_node = @head
     until current_node.nil?
-      yield current_node
+      block.call(current_node)
       current_node = current_node.next_node
     end
   end
