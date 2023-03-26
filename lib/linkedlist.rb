@@ -6,34 +6,63 @@ class LinkedList
     @head = head.nil? ? nil : Node.new(head)
   end
 
-  def prepend(data)
-    if @head.nil?
-      @head = Node.new(data)
-      @head.data
-    else
-      old_head = @head
-      @head = Node.new(data)
-      @head.next_node = old_head
+  def[](position, length = 1)
+    index = 0
+    return_me = []
+    each do |node|
+      return_me << node if index >= position
+      break if return_me.length == length
+
+      index += 1
     end
+    return_me
   end
 
-  def append(data)
+  def find(position, length)
+    self[position, length].map { |node| node.data }.join(' ')
+  end
+
+  def includes?(value)
+    each { |node| return true if node.data == value }
+    false
+  end
+
+  def insert(position, value)
+    insert_node = self[position - 1].first
+    next_node = insert_node.next_node
+    insert_node.next_node = Node.new(value)
+    insert_node.next_node.next_node = next_node
+    value
+  end
+
+  def prepend(value)
     if @head.nil?
-      @head = Node.new(data)
+      @head = Node.new(value)
     else
-      current_node = @head
-      until current_node.next_node.nil?
-        current_node = current_node.next_node
-      end
-      current_node.next_node = Node.new(data)
+      old_head = @head
+      @head = Node.new(value)
+      @head.next_node = old_head
     end
-    data
+    value
+  end
+
+  def append(value)
+    if @head.nil?
+      @head = Node.new(value)
+    else
+      last_node.next_node = Node.new(value)
+    end
+    value
   end
 
   def count
     count = 0
     each { count += 1 }
     count
+  end
+
+  def last_node
+    each { |node| return node if node.next_node.nil? }
   end
 
   def to_string
