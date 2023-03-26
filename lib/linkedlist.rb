@@ -47,12 +47,8 @@ class LinkedList
   end
 
   def append(value)
-    if @head.nil?
-      @head = Node.new(value)
-    else
-      last_node.next_node = Node.new(value)
-    end
-    value
+    @head.nil? ? @head = Node.new(value) : last_node.next_node = Node.new(value)
+    value # returning this to match the rv demonstrated in pry.  It's weird, but I do like matching!
   end
 
   def count
@@ -72,6 +68,10 @@ class LinkedList
     string.join(' ')
   end
 
+  # here's a trivial implementation of #each
+  # It takes a block, and will probably explode without one.  But
+  # we iterate through the list a lot, and this helps us to require less
+  # iterators everywhere in this code
   def each(&block)
     current_node = @head
     until current_node.nil?
