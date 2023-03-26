@@ -80,7 +80,16 @@ class LinkedList
     return string.join(" ")
   end
 
-  
+  def includes?(data)
+    current_node = @head
+    while current_node != nil
+      if current_node.data == (data)
+        return true
+      end
+      current_node = current_node.next_node
+    end
+
+  end
   
   
 end
