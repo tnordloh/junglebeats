@@ -65,6 +65,20 @@ class LinkedList
     current_node.next_node.next_node = next_node
   end
     
+  def find(position, length)
+    count = 0
+    current_node = @head
+    until count == position
+      count = count + 1
+      current_node = current_node.next_node
+    end
+    string = []
+    length.times do 
+      string << current_node.data
+      current_node = current_node.next_node
+    end
+    return string.join(" ")
+  end
 
   
   
