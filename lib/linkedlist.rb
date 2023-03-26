@@ -6,16 +6,20 @@ class LinkedList
     @head = head.nil? ? nil : Node.new(head)
   end
 
-  def[](position, length = 1)
+  # get linked_list to respond to [] in the same way Array would, so I can
+  # use it the same :)
+  def[](position, length = nil)
     index = 0
     return_me = []
+    return_array = !length.nil?
+    length ||= 1
     each do |node|
       return_me << node if index >= position
       break if return_me.length == length
 
       index += 1
     end
-    return_me
+    return_array ? return_me : return_me.first
   end
 
   def find(position, length)
@@ -28,7 +32,7 @@ class LinkedList
   end
 
   def insert(position, value)
-    insert_node = self[position - 1].first
+    insert_node = self[position - 1]
     next_node = insert_node.next_node
     insert_node.next_node = Node.new(value)
     insert_node.next_node.next_node = next_node
